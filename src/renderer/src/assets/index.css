@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Glaho'; /*Can be any text*/
+  src:
+    local('bpg_glaho_sylfaen'),
+    url('./fonts/bpg_arial_2009.ttf') format('truetype');
+}
+body {
+  font-family: 'Light';
+}
