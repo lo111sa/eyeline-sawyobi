@@ -2,6 +2,7 @@ import { create } from 'zustand'
 
 export const useModalStore = create((set) => ({
   isOpen: false,
+  modalType: '',
 
   //Open modal
   openModal: () => {
@@ -11,5 +12,10 @@ export const useModalStore = create((set) => ({
   //close modal
   closeModal: () => {
     set({ isOpen: false })
+  },
+
+  //Set modal type
+  setModalType: (type) => {
+    set({ modalType: type })
   }
 }))

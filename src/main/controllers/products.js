@@ -1,5 +1,4 @@
-const sqlite3 = require('sqlite3')
-const db = new sqlite3.Database('D:/DB.db')
+import { db } from '../index'
 
 //Get Products
 export const getProducts = async (event, received) => {
@@ -19,12 +18,22 @@ export const getProducts = async (event, received) => {
 //Add new product
 export const AddProduct = async (event, received) => {
   try {
-    db.run(
+    await db.run(
       `INSERT INTO products (name,count) VALUES(?,?)`,
       [received.name, received.count],
       function (error) {
-        console.log(this.lastID);
-        event.sender.send('add-new-product', {id: this.lastID, ...received})
+        // console.log(this.lastID)
+        event.sender.send('add-new-product', { id: this.lastID, ...received })
+
+        let date = new Date().toLocaleDateString()
+        let time = new Date().toLocaleTimeString()
+        db.run(
+          `INSERT INTO received (productId,name,count,date,time) VALUES(?,?,?,?,?)`,
+          [this.lastID, received.name, received.count, date, time],
+          function (error) {
+            //   console.log(this.lastID)
+          }
+        )
       }
     )
   } catch (error) {
