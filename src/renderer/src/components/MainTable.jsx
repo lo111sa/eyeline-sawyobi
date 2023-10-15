@@ -12,7 +12,7 @@ const MainTable = ({ data }) => {
             დასახელება
           </th>
           <th scope="col" className="px-6 py-2">
-            რაოდენობა
+            ნაშთი
           </th>
         </tr>
       </thead>

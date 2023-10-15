@@ -3,6 +3,7 @@ import MainTable from '../components/MainTable'
 import { Button, TextField } from '@mui/material'
 import { useModalStore } from '../store/ModalStore'
 import Modal from '../components/Modal'
+import AddProductForm from '../components/AddProductForm'
 
 const Main = () => {
   const modal = useModalStore()
@@ -20,7 +21,7 @@ const Main = () => {
       setData(res)
     })
   }, [text])
-  console.log(modal.isOpen)
+ 
   return (
     <div className="flex flex-col gap-2 p-3">
       <TextField
@@ -34,19 +35,7 @@ const Main = () => {
 
       <MainTable data={data} />
       <Modal title={'ახალი პროდუქტის დამატება'}>
-        <div className="flex flex-col gap-2 p-2">
-          <TextField id="outlined-basic" label="ძიება" variant="outlined" size="small" />
-          <TextField id="outlined-basic" label="ძიება" variant="outlined" size="small" />
-          <Button
-            size="small"
-            variant="contained"
-            onClick={() => {
-              ipcRenderer.send('add-new-product', { name: 'fasfasf', count: 300 })
-            }}
-          >
-            Add
-          </Button>
-        </div>
+        <AddProductForm/>
       </Modal>
     </div>
   )

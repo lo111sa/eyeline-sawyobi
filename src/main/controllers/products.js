@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3')
-const db = new sqlite3.Database('E:/DB.db')
+const db = new sqlite3.Database('D:/DB.db')
 
 //Get Products
 export const getProducts = async (event, received) => {
@@ -23,7 +23,8 @@ export const AddProduct = async (event, received) => {
       `INSERT INTO products (name,count) VALUES(?,?)`,
       [received.name, received.count],
       function (error) {
-        console.log(received)
+        console.log(this.lastID);
+        event.sender.send('add-new-product', {id: this.lastID, ...received})
       }
     )
   } catch (error) {
