@@ -1,9 +1,9 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+/* import icon from '../../resources/icon.png?asset' */
 import { AddProduct, getProducts } from './controllers/products'
-import { getReceivedProductInfo } from './controllers/receives'
+import { getReceivedProductInfo, receiveProduct } from './controllers/receives'
 const sqlite3 = require('sqlite3')
 
 export const db = new sqlite3.Database('D:/DB.db')
@@ -70,3 +70,6 @@ ipcMain.on('add-new-product', AddProduct)
 
 //Get product recive info by id
 ipcMain.on('received-by-id', getReceivedProductInfo)
+
+//Receive product
+ipcMain.on('receive', receiveProduct)

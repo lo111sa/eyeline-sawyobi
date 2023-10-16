@@ -8,7 +8,7 @@ import { DialogContentText } from '@mui/material'
 const Modal = ({ title, children }) => {
   const modal = useModalStore()
   return (
-    <Dialog open={modal.isOpen} onClose={modal.closeModal}>
+    <Dialog open={modal.isOpen} scroll={'paper'} onClose={modal.closeModal}>
       <DialogTitle className="border border-b">{title}</DialogTitle>
       <div className="">
         <DialogContent>{children}</DialogContent>

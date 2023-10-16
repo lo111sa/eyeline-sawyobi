@@ -10,3 +10,25 @@ export const getReceivedProductInfo = async (event, id) => {
     event.sender.send('received-by-id', { message: 'შეცდომა!!!', error })
   }
 }
+
+//Add count when product received
+export const receiveProduct = async (event, { name, count, id }) => {
+  try {
+    db.serialize(() => {
+      db.run('UPDATE products SET count = count + $count WHERE id = $id', {
+        $id: id,
+        $count: count
+      })
+
+      let date = new Date().toLocaleDateString()
+      let time = new Date().toLocaleTimeString()
+      db.run(
+        `INSERT INTO received (productId,name,count,date,time) VALUES(?,?,?,?,?)`,
+        [id, name, count, date, time],
+        function (error) {
+          //   console.log(this.lastID)
+        }
+      )
+    })
+  } catch (error) {}
+}

@@ -18,9 +18,9 @@ const SingleProductRecives = ({ name, id }) => {
 
   return (
     <div className="w-full h-full overflow-y-auto">
-      <p className="mb-2 text-xl text-center">{name}</p>
+      <p className="mb-4 text-xl text-center">{name}</p>
       <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 overflow-scroll">
-        <thead className=" text-blue-700  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+        <thead className=" text-blue-700  bg-gray-100 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
           <tr>
             <th scope="col" className="px-6 py-2">
               რაოდენობა

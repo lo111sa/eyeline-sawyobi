@@ -35,7 +35,6 @@ const Main = () => {
           <AddProductForm />
         </Modal>
       )}
-      ;
     </div>
   )
 }
