@@ -1,8 +1,10 @@
 import { Button, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useProductsStore } from '../store/productsStore'
 const ipcRenderer = window.ipcRenderer
 
-const ReceiveProductPopup = ({ setPopup, item }) => {
+const ReceiveProductPopup = ({ setPopup, item, searchText }) => {
+  const products = useProductsStore()
   const [count, setCount] = useState(0)
 
   return (
@@ -15,9 +17,8 @@ const ReceiveProductPopup = ({ setPopup, item }) => {
             id: item.id
           })
           setPopup()
-          ipcRenderer.on('receive', (res) => {
-            console.log(res)
-            ipcRenderer.off()
+          ipcRenderer.on('receive', async (res) => {
+            res?.message === 'ok' && products.fetchProducts(searchText)
           })
         }}
         className="flex flex-col gap-3 bg-slate-200 p-4 rounded-md"

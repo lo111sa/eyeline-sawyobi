@@ -6,7 +6,7 @@ import { Button, TextField } from '@mui/material'
 import ReceiveProductPopup from './ReceiveProductPopup'
 const ipcRenderer = window.ipcRenderer
 
-const MainTable = ({ data }) => {
+const MainTable = ({ data, searchText }) => {
   const modal = useModalStore()
   const [currItem, setCurrItem] = useState({})
   const [popup, setPopup] = useState(false)
@@ -33,7 +33,7 @@ const MainTable = ({ data }) => {
                 return (
                   <tr
                     key={item.id}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-[16px]"
+                    className="bg-white border-b dark:bg-gray-800 even:bg-gray-50 hover:bg-gray-200 text-[16px]"
                   >
                     <td
                       scope="row"
@@ -85,7 +85,11 @@ const MainTable = ({ data }) => {
                         </Button>
 
                         {item.id === currItem.id && popup === true ? (
-                          <ReceiveProductPopup item={item} setPopup={() => setPopup(false)} />
+                          <ReceiveProductPopup
+                            item={item}
+                            searchText={searchText}
+                            setPopup={() => setPopup(false)}
+                          />
                         ) : null}
                       </div>
                     </td>

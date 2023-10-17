@@ -9,26 +9,27 @@ import { useProductsStore } from '../store/productsStore'
 const Main = () => {
   const modal = useModalStore()
   const products = useProductsStore()
-  const [text, setText] = useState('')
+  const [searchText, setSearchText] = useState('')
   const [modalType, setModalType] = useState('received')
 
   useEffect(() => {
-    products.fetchProducts(text)
-  }, [text])
+    products.fetchProducts(searchText)
+  }, [searchText])
 
   return (
     <div className="flex w-full border rounded-md shadow">
       <div className="flex flex-col w-full gap-2 p-3 overflow-">
         <TextField
+          value={searchText}
           id="outlined-basic"
           label="ძიება"
           variant="outlined"
           size="small"
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
           className="w-1/2"
         />
 
-        <MainTable data={products.data} />
+        <MainTable data={products.data} searchText={searchText} />
       </div>
       {modal.modalType === 'add-product' && (
         <Modal title={'ახალი პროდუქტის დამატება'}>
