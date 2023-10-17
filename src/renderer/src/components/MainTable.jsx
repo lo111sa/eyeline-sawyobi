@@ -43,7 +43,7 @@ const MainTable = ({ data }) => {
                     </td>
                     <td
                       scope="row"
-                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrapborder"
+                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap border"
                     >
                       {item.name}
                     </td>

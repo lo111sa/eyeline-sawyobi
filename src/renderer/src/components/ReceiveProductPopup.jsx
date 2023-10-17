@@ -1,9 +1,10 @@
 import { Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 const ipcRenderer = window.ipcRenderer
 
 const ReceiveProductPopup = ({ setPopup, item }) => {
   const [count, setCount] = useState(0)
+
   return (
     <div className=" absolute h-5 top-8 -left-20 z-50">
       <form
@@ -14,6 +15,10 @@ const ReceiveProductPopup = ({ setPopup, item }) => {
             id: item.id
           })
           setPopup()
+          ipcRenderer.on('receive', (res) => {
+            console.log(res)
+            ipcRenderer.off()
+          })
         }}
         className="flex flex-col gap-3 bg-slate-200 p-4 rounded-md"
       >

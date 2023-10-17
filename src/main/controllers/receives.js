@@ -26,7 +26,7 @@ export const receiveProduct = async (event, { name, count, id }) => {
         `INSERT INTO received (productId,name,count,date,time) VALUES(?,?,?,?,?)`,
         [id, name, count, date, time],
         function (error) {
-          //   console.log(this.lastID)
+          event.sender.send('receive', { message: 'ok', count: count })
         }
       )
     })
