@@ -30,6 +30,10 @@ const AddProductForm = () => {
         variant="outlined"
         size="small"
         onChange={(e) => setName(e.target.value)}
+        autoFocus
+        onFocus={(event) => {
+          event.target.select()
+        }}
       />
       <TextField
         value={count}

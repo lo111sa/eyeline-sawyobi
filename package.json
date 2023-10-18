@@ -23,6 +23,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.13",
     "axios": "^1.5.1",
+    "dateformat": "^5.0.3",
     "electron-updater": "^6.1.1",
     "react-tailwindcss-select": "^1.8.5",
     "sqlite3": "^5.1.6",

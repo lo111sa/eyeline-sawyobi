@@ -1,4 +1,5 @@
 import { db } from '../index'
+import { format } from '../utils/functions'
 
 //Get Products
 export const getProducts = async (event, received) => {
@@ -25,7 +26,7 @@ export const AddProduct = async (event, received) => {
         // console.log(this.lastID)
         event.sender.send('add-new-product', { id: this.lastID, ...received })
 
-        let date = new Date().toLocaleDateString()
+        let date = format(new Date())
         let time = new Date().toLocaleTimeString()
         db.run(
           `INSERT INTO received (productId,name,count,date,time) VALUES(?,?,?,?,?)`,

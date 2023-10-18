@@ -5,12 +5,13 @@ import { useProductsStore } from '../store/productsStore'
 import { useModalStore } from '../store/modalStore'
 const ipcRenderer = window.ipcRenderer
 
-const IssueProduct = ({ id, name, searchText }) => {
+const IssueProduct = ({ id, name, searchText, stock }) => {
   const products = useProductsStore()
   const modal = useModalStore()
   const [value, setValue] = useState('')
   const [staff, setStaff] = useState([])
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
+  const [close, setClose] = useState(false)
 
   useEffect(() => {
     setStaff([])
@@ -28,11 +29,18 @@ const IssueProduct = ({ id, name, searchText }) => {
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault()
-        ipcRenderer.send('issue', { id, count, name, staffName: value.label, staffId: value.value })
-        products.fetchProducts(searchText)
-        modal.closeModal()
+        await ipcRenderer.send('issue', {
+          id,
+          count,
+          name,
+          staffName: value.label,
+          staffId: value.value
+        })
+        await ipcRenderer.on('issue', async (res) => {
+          res?.message === 'ok' && products.fetchProducts(searchText)
+        })
       }}
       className="flex flex-col gap-5 text-indigo-800"
     >
@@ -40,11 +48,14 @@ const IssueProduct = ({ id, name, searchText }) => {
       <div className="w-[500px] h-80 flex gap-4 text-black">
         <TextField
           value={count}
-          onChange={(e) => setCount(e.target.value)}
+          onChange={(e) => setCount(e.target.value <= stock ? e.target.value : stock)}
           autoFocus
           type="number"
           size="small"
           label="რაოდენობა"
+          onFocus={(event) => {
+            event.target.select()
+          }}
         />
 
         <Select

@@ -5,7 +5,7 @@ const ipcRenderer = window.ipcRenderer
 
 const ReceiveProductPopup = ({ setPopup, item, searchText }) => {
   const products = useProductsStore()
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
 
   return (
     <div className=" absolute h-5 top-8 -left-20 z-50">

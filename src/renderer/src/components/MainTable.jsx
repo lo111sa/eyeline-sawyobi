@@ -34,7 +34,9 @@ const MainTable = ({ data, searchText }) => {
                 return (
                   <tr
                     key={item.id}
-                    className="bg-white border-b dark:bg-gray-800 even:bg-gray-50 hover:bg-gray-200 text-[16px]"
+                    className={`${
+                      item.count > 0 ? 'bg-white' : 'bg-red-500'
+                    }   border-b even:bg-gray-50 hover:bg-gray-200 text-[16px]`}
                   >
                     <td
                       scope="row"
@@ -113,14 +115,14 @@ const MainTable = ({ data, searchText }) => {
         </tbody>
       </table>
       {modal.modalType === 'product-info' && (
-        <Modal title={'მიღებების ისტორია'}>
+        <Modal title={'მიღება / გაცემების ისტორია'}>
           <SingleProductRecives {...currItem} />
         </Modal>
       )}
 
       {modal.modalType === 'issue' && (
         <Modal title={'პროდუქტის გაცემა'}>
-          <IssueProduct {...currItem} searchText={searchText} />
+          <IssueProduct {...currItem} searchText={searchText} stock={currItem.count} />
         </Modal>
       )}
     </div>
