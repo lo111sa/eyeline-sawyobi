@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import MainTable from '../components/MainTable'
-import { Button, TextField } from '@mui/material'
+import { Button, MenuItem, Select, TextField } from '@mui/material'
 import { useModalStore } from '../store/modalStore'
 import Modal from '../components/Modal'
 import AddProductForm from '../components/AddProductForm'

@@ -4,6 +4,8 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 /* import icon from '../../resources/icon.png?asset' */
 import { AddProduct, getProducts } from './controllers/products'
 import { getReceivedProductInfo, receiveProduct } from './controllers/receives'
+import { getStuffList } from './controllers/staff'
+import { getIssuedProductInfo, issueProduct } from './controllers/issued'
 const sqlite3 = require('sqlite3')
 
 export const db = new sqlite3.Database('D:/DB.db')
@@ -11,7 +13,7 @@ export const db = new sqlite3.Database('D:/DB.db')
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1000,
     height: 670,
     show: false,
     autoHideMenuBar: true,
@@ -73,3 +75,12 @@ ipcMain.on('received-by-id', getReceivedProductInfo)
 
 //Receive product
 ipcMain.on('receive', receiveProduct)
+
+//STAFF
+//Get staff list
+ipcMain.on('staff', getStuffList)
+
+//Issue
+
+ipcMain.on('get-issued', getIssuedProductInfo)
+ipcMain.on('issue', issueProduct)

@@ -18,9 +18,9 @@ const SingleProductRecives = ({ name, id }) => {
 
   return (
     <div className="w-full h-full overflow-y-auto">
-      <p className="mb-4 text-xl text-center">{name}</p>
-      <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400 overflow-scroll">
-        <thead className=" text-blue-700  bg-gray-100 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
+      <p className="mb-4 text-2xl text-center text-indigo-600 font-bold">{name}</p>
+      <table className="w-full  text-sm text-left text-gray-500 overflow-scroll">
+        <thead className=" text-blue-700  bg-gray-100 ">
           <tr>
             <th scope="col" className="px-6 py-2">
               რაოდენობა
@@ -39,23 +39,23 @@ const SingleProductRecives = ({ name, id }) => {
                 return (
                   <tr
                     key={item.id}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-[16px]"
+                    className="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 text-[16px]"
                   >
                     <td
                       scope="row"
-                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap"
                     >
                       {item.count}
                     </td>
                     <td
                       scope="row"
-                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap"
                     >
                       {item.date}
                     </td>
                     <td
                       scope="row"
-                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap"
                     >
                       {item.time}
                     </td>
