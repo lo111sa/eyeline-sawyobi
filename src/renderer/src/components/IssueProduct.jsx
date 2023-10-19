@@ -51,7 +51,7 @@ const IssueProduct = ({ id, name, searchText, stock }) => {
       <div className="w-[500px] h-80 flex gap-4 text-black">
         <TextField
           value={count}
-          onChange={(e) => setCount(e.target.value <= stock ? e.target.value : stock)}
+          onChange={(e) => setCount(e.target.value)}
           autoFocus
           type="number"
           size="small"
