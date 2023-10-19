@@ -2,18 +2,18 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 /* import icon from '../../resources/icon.png?asset' */
-import { AddProduct, getProducts } from './controllers/products'
+import { AddProduct, deleteProduct, getProducts } from './controllers/products'
 import { getReceivedProductInfo, receiveProduct } from './controllers/receives'
-import { getStuffList } from './controllers/staff'
+import { AddStaff, deleteStaff, getStuffList } from './controllers/staff'
 import { getIssuedProductInfo, issueProduct } from './controllers/issued'
 const sqlite3 = require('sqlite3')
 
-export const db = new sqlite3.Database('D:/DB.db')
+export const db = new sqlite3.Database('D:/Database/DB.db')
 
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 1070,
     height: 670,
     show: false,
 
@@ -71,6 +71,9 @@ ipcMain.on('send', getProducts)
 //Add new Product
 ipcMain.on('add-new-product', AddProduct)
 
+//Delete Product
+ipcMain.on('delete-product', deleteProduct)
+
 //Get product recive info by id
 ipcMain.on('received-by-id', getReceivedProductInfo)
 
@@ -79,8 +82,10 @@ ipcMain.on('receive', receiveProduct)
 
 //STAFF
 //Get staff list
-ipcMain.on('staff', getStuffList)
-
+ipcMain.on('get-staff', getStuffList)
+//Add staff
+ipcMain.on('add-staff', AddStaff)
+ipcMain.on('delete-staff', deleteStaff)
 //Issue
 
 ipcMain.on('get-issued', getIssuedProductInfo)

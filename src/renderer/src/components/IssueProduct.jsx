@@ -15,8 +15,8 @@ const IssueProduct = ({ id, name, searchText, stock }) => {
 
   useEffect(() => {
     setStaff([])
-    ipcRenderer.send('staff', id)
-    ipcRenderer.on('staff', (res) => {
+    ipcRenderer.send('get-staff', id)
+    ipcRenderer.on('get-staff', (res) => {
       res.forEach((item) => {
         setStaff((prev) => [...prev, { value: item.id, label: item.name }])
       })

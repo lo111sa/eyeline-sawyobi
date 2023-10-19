@@ -5,7 +5,7 @@ import { format } from '../utils/functions'
 export const getProducts = async (event, received) => {
   try {
     await db.all(
-      'SELECT * FROM products where name LIKE $title',
+      'SELECT * FROM products where name LIKE $title ORDER BY name',
       { $title: `%${received}%` },
       (error, rows) => {
         event.sender.send('send', rows)
@@ -39,5 +39,14 @@ export const AddProduct = async (event, received) => {
     )
   } catch (error) {
     event.sender.send('add-new-product', { message: 'დამატებისას მოხდა შეცდომა', error })
+  }
+}
+
+//Delete product
+export const deleteProduct = async (event, { id }) => {
+  try {
+    await db.run('DELETE FROM products WHERE id = $id', { $id: id }, (error, rows) => {})
+  } catch (error) {
+    event.sender.send('delete-product', { message: 'შეცდომა!!!', error })
   }
 }

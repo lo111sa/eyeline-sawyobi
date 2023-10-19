@@ -5,12 +5,20 @@ import SingleProductRecives from './SingleProductRecives'
 import { Button, TextField } from '@mui/material'
 import ReceiveProductPopup from './ReceiveProductPopup'
 import IssueProduct from './IssueProduct'
+import Staff from './Staff'
+import { useProductsStore } from '../store/productsStore'
 const ipcRenderer = window.ipcRenderer
 
 const MainTable = ({ data, searchText }) => {
   const modal = useModalStore()
+  const products = useProductsStore()
   const [currItem, setCurrItem] = useState({})
   const [popup, setPopup] = useState(false)
+
+  const deleteProduct = async (id) => {
+    await ipcRenderer.send('delete-product', { id: id })
+    await products.fetchProducts(searchText)
+  }
   return (
     <div className="w-full h-full overflow-y-auto">
       <table className="w-full  text-sm text-left text-gray-500 overflow-scroll table-fixed">
@@ -34,9 +42,9 @@ const MainTable = ({ data, searchText }) => {
                 return (
                   <tr
                     key={item.id}
-                    className={`${
-                      item.count > 0 ? 'bg-white' : 'bg-red-500'
-                    }   border-b even:bg-gray-50 hover:bg-gray-200 text-[16px]`}
+                    className={`border-b  hover:bg-gray-200 ${
+                      item.count > 0 ? 'bg-white even:bg-gray-50' : 'bg-red-500'
+                    } text-[16px]`}
                   >
                     <td
                       scope="row"
@@ -95,7 +103,14 @@ const MainTable = ({ data, searchText }) => {
                           ისტორია
                         </Button>
 
-                        <Button size="small" variant="outlined" color="error" onClick={() => {}}>
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          color="error"
+                          onClick={() => {
+                            deleteProduct(item.id)
+                          }}
+                        >
                           წაშლა
                         </Button>
 
@@ -123,6 +138,12 @@ const MainTable = ({ data, searchText }) => {
       {modal.modalType === 'issue' && (
         <Modal title={'პროდუქტის გაცემა'}>
           <IssueProduct {...currItem} searchText={searchText} stock={currItem.count} />
+        </Modal>
+      )}
+
+      {modal.modalType === 'add-staff' && (
+        <Modal title={'თანამშრომლის დამატება'}>
+          <Staff />
         </Modal>
       )}
     </div>

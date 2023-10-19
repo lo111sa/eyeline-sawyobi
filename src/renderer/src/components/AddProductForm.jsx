@@ -7,7 +7,7 @@ const AddProductForm = () => {
   const modal = useModalStore()
   const products = useProductsStore()
   const [name, setName] = useState('')
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -18,7 +18,7 @@ const AddProductForm = () => {
     }
     products.addProduct(data)
     setName('')
-    setCount(0)
+    setCount(1)
   }
 
   return (
