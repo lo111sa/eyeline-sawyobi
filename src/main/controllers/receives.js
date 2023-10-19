@@ -26,7 +26,7 @@ export const receiveProduct = async (event, { name, count, id }) => {
       })
 
       let date = format(new Date())
-      let time = new Date().toLocaleTimeString()
+      let time = new Date().toLocaleTimeString('en-GB')
       db.run(
         `INSERT INTO received (productId,name,count,date,time) VALUES(?,?,?,?,?)`,
         [id, name, count, date, time],

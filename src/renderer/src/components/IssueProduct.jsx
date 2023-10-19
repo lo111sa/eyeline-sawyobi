@@ -41,6 +41,9 @@ const IssueProduct = ({ id, name, searchText, stock }) => {
         await ipcRenderer.on('issue', async (res) => {
           res?.message === 'ok' && products.fetchProducts(searchText)
         })
+
+        setValue('')
+        setCount(1)
       }}
       className="flex flex-col gap-5 text-indigo-800"
     >
@@ -70,7 +73,7 @@ const IssueProduct = ({ id, name, searchText, stock }) => {
           searchInputPlaceholder="ძიება..."
         />
       </div>
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" disabled={value !== '' ? false : true}>
         გაცემა
       </Button>
     </form>

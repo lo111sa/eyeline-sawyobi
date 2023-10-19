@@ -22,7 +22,7 @@ const AddProductForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-4 py-2">
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 py-2 mt-5">
       <TextField
         value={name}
         id="outlined-basic"

@@ -26,8 +26,8 @@ export const issueProduct = async (event, { count, name, id, staffId, staffName 
       })
 
       let date = format(new Date())
-      console.log(date)
-      let time = new Date().toLocaleTimeString()
+
+      let time = new Date().toLocaleTimeString('en-GB')
       db.run(
         `INSERT INTO issued (productId,name,count,staffId,staffName,date,time) VALUES (?,?,?,?,?,?,?)`,
         [id, name, count, staffId, staffName, date, time],
